@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jadual Ruang Sekolah SMKMII</title>
+  <meta charset="utf-8" />
+  <style>
+    body {
+      background: #000;
+      color: #0f0;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #111;
+      padding: 10px;
+    }
+
+    #clock {
+      font-size: 1.5em;
+      color: #0ff;
+    }
+
+    h1 {
+      margin: 10px 0;
+      font-size: 2em;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 1.3em;
+    }
+
+    th, td {
+      padding: 10px;
+      border-bottom: 1px solid #333;
+    }
+
+    th {
+      background: #222;
+      color: #0f0;
+    }
+
+    td {
+      background: #000;
+    }
+
+    .marquee {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      box-sizing: border-box;
+      background: #111;
+      color: yellow;
+      font-size: 1.2em;
+      padding: 10px 0;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      z-index: 999;
+    }
+
+    .marquee span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: marquee 20s linear infinite;
+    }
+
+    @keyframes marquee {
+      0%   { transform: translateX(0%); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div id="clock">Memuat masa...</div>
+    <h1>📌 JADUAL OPERASI RUANG SMKMII</h1>
+  </header>
+
+  <table id="jadual">
+    <thead>
+      <tr>
+        <th>KOD</th>
+        <th>PROGRAM</th>
+        <th>PENYELIA</th>
+        <th>TARIKH</th>
+        <th>MASA</th>
+        <th>STATUS</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <div class="marquee">
+    <span>📢 Sila jaga kebersihan ruang. Gunakan kemudahan dengan bertanggungjawab. Tandas di tingkat bawah. — SMKMII</span>
+  </div>
+
+  <script>
+    // ✅ Masa semasa
+    function updateClock() {
+      const now = new Date();
+      const timeStr = now.toLocaleTimeString('ms-MY', { hour12: false });
+      document.getElementById('clock').textContent = `Masa sekarang: ${timeStr}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // ✅ DATA DALAM KOD — Hadif boleh ubah sini!
+    const data = [
+      { KOD: 'R01', PROGRAM: 'Tayangan Kemerdekaan', PENYELIA: 'Cikgu Siti', TARIKH: '2025-08-03', MASA: '08:00 - 09:00', STATUS: 'AKAN BERMULA' },
+      { KOD: 'R02', PROGRAM: 'Bengkel Fotografi', PENYELIA: 'Encik Haris', TARIKH: '2025-08-03', MASA: '09:00 - 10:00', STATUS: 'BOLEH MASUK' },
+      { KOD: 'R03', PROGRAM: 'Perbincangan TVPSS', PENYELIA: 'Pn. Liza', TARIKH: '2025-08-03', MASA: '10:00 - 11:00', STATUS: 'SEDANG BERMULA' },
+      { KOD: 'R04', PROGRAM: 'Kelas Suntingan Video', PENYELIA: 'Ustaz Nasir', TARIKH: '2025-08-03', MASA: '11:00 - 12:00', STATUS: 'DILEWATKAN' },
+      { KOD: 'R05', PROGRAM: 'Rakaman Studio', PENYELIA: 'Cikgu Alin', TARIKH: '2025-08-03', MASA: '12:00 - 13:00', STATUS: 'DIBATALKAN' },
+      { KOD: 'R06', PROGRAM: 'Taklimat Pengurusan', PENYELIA: 'Pn. Rina', TARIKH: '2025-08-03', MASA: '13:00 - 14:00', STATUS: 'SELESAI' }
+    ];
+
+    // ✅ Papar data
+    function paparkanData(data) {
+      const tbody = document.querySelector('#jadual tbody');
+      tbody.innerHTML = '';
+
+      data.forEach((row) => {
+        const statusText = row.STATUS.toUpperCase().trim();
+        let statusColor = '';
+
+        switch (statusText) {
+          case 'AKAN BERMULA': statusColor = 'yellow'; break;
+          case 'BOLEH MASUK': statusColor = 'lime'; break;
+          case 'SEDANG BERMULA': statusColor = 'deepskyblue'; break;
+          case 'DILEWATKAN': statusColor = 'red'; break;
+          case 'DIBATALKAN': statusColor = 'orange'; break;
+          case 'SELESAI': statusColor = 'gray'; break;
+          default: statusColor = 'white';
+        }
+
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${row.KOD}</td>
+          <td>${row.PROGRAM}</td>
+          <td>${row.PENYELIA}</td>
+          <td>${row.TARIKH}</td>
+          <td>${row.MASA}</td>
+          <td style="color:${statusColor}; font-weight:bold">${row.STATUS}</td>
+        `;
+        tbody.appendChild(tr);
+
+        if (statusText === 'SELESAI') {
+          setTimeout(() => {
+            tr.remove();
+          }, 30000);
+        }
+      });
+    }
+
+    // ✅ Paparkan data bila siap loading
+    window.onload = function () {
+      paparkanData(data);
+    };
+  </script>
+</body>
+</html>
