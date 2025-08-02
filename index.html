@@ -91,6 +91,7 @@
     <h1>JADUAL OPERASI RUANG SMK MEMBAKUT II</h1>
     <div id="today"></div>
     <div id="clock">Memuat masa...</div>
+    <h5>By HADIF IRSYAD</h5>
   </header>
 
   <table id="jadual">
@@ -108,7 +109,7 @@
   </table>
 
   <div class="marquee">
-    <span>(PERINGATAN!) Sila jaga kebersihan ruang. Gunakan kemudahan dengan bertanggungjawab. Sila datang min 5 minit sebelum mula. — SMKMII</span>
+    <span>(PERINGATAN !) Sila jaga kebersihan ruang. Gunakan kemudahan dengan bertanggungjawab. Sila datang min 5 minit sebelum mula. — SMKMII</span>
   </div>
 
   <script>
@@ -126,12 +127,11 @@
     }
 
     const data = [
-      { KOD: 'R01', PROGRAM: 'ASK', PENYELIA: 'Cikgu Husaini', TARIKH: 'HARI INI', MASA: '08:30 - 09:30', STATUS: 'AKAN BERMULA },
-      { KOD: 'R02', PROGRAM: 'IV', PENYELIA: 'IV', TARIKH: 'IV', MASA: 'IV', STATUS: 'INVALID' },
-      { KOD: 'R03', PROGRAM: 'IV', PENYELIA: 'IV', TARIKH: 'IV', MASA: 'IV', STATUS: 'INVALID' },
-      { KOD: 'R04', PROGRAM: 'IV', PENYELIA: 'IV', TARIKH: 'IV', MASA: 'IV', STATUS: 'INVALID' },
-      { KOD: 'R05', PROGRAM: 'IV', PENYELIA: 'IV', TARIKH: 'IV', MASA: 'IV', STATUS: 'INVALID' },
-      { KOD: 'R06', PROGRAM: 'IV', PENYELIA: 'IV', TARIKH: 'IV', MASA: 'IV', STATUS: 'INVALID' }
+      { KOD: '01', PROGRAM: 'IV', PENYELIA: 'IV', TARIKH: 'HARI INI', MASA: 'IV', STATUS: 'SEDANG BERMULA' },
+      { KOD: '02', PROGRAM: '-', PENYELIA: '-', TARIKH: '-', MASA: '-', STATUS: 'INVALID' },
+      { KOD: '03', PROGRAM: '-', PENYELIA: '-', TARIKH: '-', MASA: '-', STATUS: 'INVALID' },
+      { KOD: '04', PROGRAM: '-', PENYELIA: '-', TARIKH: '-', MASA: '-', STATUS: 'INVALID' },
+      { KOD: '05', PROGRAM: '-', PENYELIA: '-', TARIKH: '-', MASA: '-', STATUS: 'INVALID' },
     ];
 
     function paparkanData(data) {
@@ -180,5 +180,3 @@
   </script>
 </body>
 </html>
-
-
